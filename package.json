@@ -1,0 +1,25 @@
+{
+  "name": "tennu-giphy",
+  "version": "1.1.0",
+  "description": "A plugin for the tennu IRC framework, uses giphy API.",
+  "main": "plugin.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/VictorioBerra/tennu-giphy.git"
+  },
+  "scripts": {
+    "test": "mocha",
+    "postversion": "git push && git push --tags && npm publish"
+  },
+  "author": "Victorio Berra",
+  "license": "ISC",
+  "dependencies": {
+    "bluebird": "^3.5.1",
+    "giphy-api": "^2.0.1"
+  },
+  "peerDependencies": {},
+  "devDependencies": {
+    "mocha": "^5.0.0",
+    "should": "^13.2.1"
+  }
+}
