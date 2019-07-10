@@ -47,7 +47,7 @@ describe('Giphy', function() {
       var command = createCommand('!giphy hello');
       giphyHandler(command)
         .then(function(res){
-          assert.equal(res.indexOf('https://giphy.com/gifs/') > -1, true, 'Response did not have expetced URL components.');
+          assert.equal(res.indexOf('https') > -1, true, 'Response did not seem to be a URL.');
           done();
         });
 

@@ -1,4 +1,5 @@
 const Promise = require('bluebird');
+const URL = require('url').URL;
 
 // The name of the environment variable to check for the giphy API key
 const API_KEY_ENV_VAR_NAME = 'GIPHY_API_KEY';
@@ -42,28 +43,26 @@ var TennuGiphy = {
 
         var giphyCommand = function(command) {
             return Promise.try(function() {
-                    if (command.args.length === 0) {
-                        return giphy.random().then(function(res) {
-                            return res.data.url;
-                        });
-                    }
-                    else {
-
-                        return giphy.search({
-                            q: command.args.join(' '),
-                            limit: 1
-                        }).then(function(res) {
-                            return res.data[0].url;
-                        });
-                    }
-
-                })
-                .catch(function(err) {
-                    return getErrorResponse(err.message);
-                });
-
+                if (command.args.length === 0) {
+                    return giphy.random().then(function(res) {
+                        return res.data.url;
+                    });
+                }
+                else {
+                    return giphy.search({
+                        q: command.args.join(' '),
+                        limit: 1
+                    }).then(function(res) {
+                        const url = new URL(res.data[0].images.original.url);
+                        url.search = ""; // Clear all query string params
+                        return url.toString();
+                    });
+                }
+            })
+            .catch(function(err) {
+                return getErrorResponse(err.message);
+            });
         }
-
 
         return {
 
