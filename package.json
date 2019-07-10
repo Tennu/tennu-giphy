@@ -1,6 +1,6 @@
 {
   "name": "tennu-giphy",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "A plugin for the tennu IRC framework, uses giphy API.",
   "main": "plugin.js",
   "repository": {
