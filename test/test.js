@@ -9,10 +9,10 @@ const plugin = require('../plugin.js').init({
 
 function createCommand(message) {
   var splitMessages = message.split(/ +/);
-  splitMessages.shift();
   return {
     nick: 'testuser',
     message: message,
+    command: splitMessages.shift().toLowerCase(), // https://github.com/Tennu/tennu/blob/master/src/plugin/commands.sjs#L10
     args: splitMessages // https://github.com/Tennu/tennu/blob/master/src/plugin/commands.sjs#L9
   }
 }
@@ -36,7 +36,20 @@ describe('Giphy', function() {
       var command = createCommand('!giphy');
       giphyHandler(command)
         .then(function(res){
-          assert.equal(res.indexOf('https://giphy.com/gifs/') > -1, true, 'Response did not have expetced URL components.');
+          console.debug(res);
+          assert.equal(res.indexOf('https') > -1, true, 'Response did not seem to be a URL.');
+          done();
+        });
+
+    });
+
+    it('Should accept a rating argument', function(done) {
+
+      var command = createCommand('!giphy -g');
+      giphyHandler(command)
+        .then(function(res){
+          console.debug(res);
+          assert.equal(res.indexOf('https') > -1, true, 'Response did not seem to be a URL.');
           done();
         });
 
@@ -47,6 +60,7 @@ describe('Giphy', function() {
       var command = createCommand('!giphy hello');
       giphyHandler(command)
         .then(function(res){
+          console.debug(res);
           assert.equal(res.indexOf('https') > -1, true, 'Response did not seem to be a URL.');
           done();
         });

@@ -15,7 +15,8 @@
   "license": "ISC",
   "dependencies": {
     "bluebird": "^3.5.1",
-    "giphy-api": "^2.0.1"
+    "giphy-api": "^2.0.1",
+    "yargs": "^13.2.4"
   },
   "peerDependencies": {},
   "devDependencies": {
