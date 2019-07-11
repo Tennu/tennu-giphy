@@ -26,7 +26,7 @@ var TennuGiphy = {
 
         const giphy = require("giphy-api")(apiKey);
 
-        const giphyHelp = '{{!}}giphy,giph,gif [<search phrase>]';
+        const giphyHelp = '{{!}}giphy,giph,gif [-g|-pg|-pg13|-r] [<search phrase>]';
         const helps = {
             'giphy': [
                 giphyHelp
