@@ -57,7 +57,7 @@ describe('Giphy', function() {
 
     it('Should return URL after search', function(done) {
 
-      var command = createCommand('!giphy hello');
+      var command = createCommand('!giphy test');
       giphyHandler(command)
         .then(function(res){
           console.debug(res);

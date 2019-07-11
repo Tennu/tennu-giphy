@@ -9,7 +9,7 @@ Add a slack-like Giphy command to your Tennu IRC bot.
 
 ### Commands
 
-- **!giphy (or !gif, !giph) [-g|-pg|-pg13|-r] [<search query>]**: Get a random gif, or search for a single gif, optionally specify rating.
+- **!giphy (or !gif, !giph) [-g|-pg|-pg13|-r|-y|-unrated|-nsfw] [<search query>]**: Get a random gif, or search for a single gif, optionally specify rating.
 
 ### Configuration
 

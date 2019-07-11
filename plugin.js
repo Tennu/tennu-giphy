@@ -30,11 +30,11 @@ var TennuGiphy = {
         }
 
         const apiKey = config['api-key'] || process.env[API_KEY_ENV_VAR_NAME];
-        const minRating = config['minRating'];
+        const minRating = config['minRating'] || "pg-13";
 
         const giphy = require("giphy-api")(apiKey);
 
-        const giphyHelp = '{{!}}giphy,giph,gif [-g|-pg|-pg13|-r] [<search phrase>]';
+        const giphyHelp = '{{!}}giphy,giph,gif [-g|-pg|-pg13|-r|-y|-unrated|-nsfw] [<search phrase>]';
         const helps = {
             'giphy': [
                 giphyHelp
@@ -56,10 +56,10 @@ var TennuGiphy = {
         }
 
         var giphyCommand = function(command) {
-            
+
             const parsedArgs = yargs.parse(command.message);
             const hasSearchQuery = command.args.length === 0;
-            
+
             let rating = minRating;
             if(parsedArgs.g) {
                 rating = "g";
@@ -69,6 +69,12 @@ var TennuGiphy = {
                 rating = "pg13";
             } else if (parsedArgs.r) {
                 rating = "r";
+            } else if (parsedArgs.y) {
+                rating = "y";
+            } else if (parsedArgs.unrated) {
+                rating = "unrated";
+            } else if (parsedArgs.nsfw) {
+                rating = "nsfw";
             }
 
             return Promise.try(function() {
@@ -87,11 +93,11 @@ var TennuGiphy = {
                         rating: rating,
                         limit: 1
                     }).then(function(res) {
-                        
+
                         if(res.pagination.count === 0) {
                             return _getNotice('No gifs found matching your search.');
                         }
-                        
+
                         const urlStr = clearParams(res.data[0].images.original.url)
                         return formatResponse(res.data[0], urlStr);
                     });
