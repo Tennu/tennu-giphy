@@ -5,6 +5,14 @@ const yargs = require('yargs');
 // The name of the environment variable to check for the giphy API key
 const API_KEY_ENV_VAR_NAME = 'GIPHY_API_KEY';
 
+const _getNotice = function(message) {
+    return {
+        'intent': 'notice',
+        'query': true,
+        'message': message
+    };
+};
+
 var TennuGiphy = {
     configDefaults: {
         'giphy': {
@@ -79,6 +87,11 @@ var TennuGiphy = {
                         rating: rating,
                         limit: 1
                     }).then(function(res) {
+                        
+                        if(res.pagination.count === 0) {
+                            return _getNotice('No gifs found matching your search.');
+                        }
+                        
                         const urlStr = clearParams(res.data[0].images.original.url)
                         return formatResponse(res.data[0], urlStr);
                     });

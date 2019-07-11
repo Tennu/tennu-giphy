@@ -67,6 +67,18 @@ describe('Giphy', function() {
 
     });
 
+    it('Should not return URL after bogus search', function(done) {
+
+      var command = createCommand('!giphy sdasdfasdq323rsfsgvt2');
+      giphyHandler(command)
+        .then(function(res){
+          console.debug(res);
+          assert.equal(res.message.indexOf('No gifs found matching your search.') > -1, true, 'Response did not seem to be a URL.');
+          done();
+        });
+
+    });
+
   });
 
 
