@@ -20,7 +20,7 @@
   },
   "peerDependencies": {},
   "devDependencies": {
-    "mocha": "^5.0.0",
+    "mocha": "^10.2.0",
     "should": "^13.2.1"
   }
 }
